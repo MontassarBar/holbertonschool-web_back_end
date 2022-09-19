@@ -3,6 +3,6 @@
     the floor of the float'''
 
 
-def floor(n: float):
+def floor(n: float) -> int:
     '''basic stuff'''
     return int(n)
