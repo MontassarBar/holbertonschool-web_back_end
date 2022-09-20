@@ -4,7 +4,7 @@ The code is nearly identical to wait_n except task_wait_random is
 being called'''
 from typing import List
 
-wait_random = __import__('0-basic_async_syntax').wait_random
+task_wait_random = __import__('3-tasks').task_wait_random
 
 
 async def task_wait_n(n: int, max_delay: int = 10) -> List[float]:
@@ -12,6 +12,6 @@ async def task_wait_n(n: int, max_delay: int = 10) -> List[float]:
     i = 0
     list = []
     for i in range(0, n):
-        r = await wait_random(max_delay)
+        r = await task_wait_random(max_delay)
         list.append(r)
     return sorted(list)
