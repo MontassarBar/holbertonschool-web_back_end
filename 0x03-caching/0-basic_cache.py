@@ -1,9 +1,6 @@
 #!/usr/bin/python3
 '''BasicCache class'''
 
-from ast import Not
-
-
 BaseCaching = __import__('base_caching').BaseCaching
 
 
