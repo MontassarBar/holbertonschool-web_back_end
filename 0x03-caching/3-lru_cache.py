@@ -20,9 +20,6 @@ class LRUCache(BaseCaching):
                 del(self.rm[len(self.rm) - 1])
         if key is not None and item is not None:
             self.cache_data[key] = item
-            for k in range(0, len(self.rm) - 1):
-                if self.rm[k] == key:
-                    del(self.rm[k])
             self.rm.insert(0, key)
 
     def get(self, key):
