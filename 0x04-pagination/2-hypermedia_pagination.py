@@ -45,6 +45,10 @@ class Server:
             return {'page_size': 0, 'page': page, 'data': data,
                     'next_page': None, 'prev_page': page - 1,
                     'total_pages': int(len(self.__dataset) / page_size)}
+        if page - 1 < 1:
+            {'page_size': page_size, 'page': page, 'data': data,
+                'next_page': page + 1, 'prev_page': None,
+                'total_pages': int(len(self.__dataset) / page_size)}
         return {'page_size': page_size, 'page': page, 'data': data,
                 'next_page': page + 1, 'prev_page': page - 1,
                 'total_pages': int(len(self.__dataset) / page_size)}
