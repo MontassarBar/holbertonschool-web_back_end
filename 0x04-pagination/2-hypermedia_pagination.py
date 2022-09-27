@@ -44,6 +44,7 @@ class Server:
         t = len(self.__dataset) / page_size
         if t % 1 != 0.0:
             t = t + 1
+        x = int(t)
         ps = page_size
         pn = page + 1
         pp = page - 1
@@ -55,7 +56,7 @@ class Server:
             pp = None
         return {'page_size': ps, 'page': page, 'data': data,
                 'next_page': pn, 'prev_page': pp,
-                'total_pages': int(t)}
+                'total_pages': x}
 
     def index_range(self, page: int, page_size: int) -> Tuple:
         '''index range'''
