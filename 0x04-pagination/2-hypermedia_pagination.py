@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
+'''class server'''
 import csv
 import math
-from socketserver import DatagramRequestHandler
 from typing import Dict, List, Tuple
 
 
@@ -25,6 +25,7 @@ class Server:
         return self.__dataset
 
     def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
+        '''get page data'''
         assert type(page) == int
         assert type(page_size) == int
         assert page > 0
@@ -38,6 +39,7 @@ class Server:
         return list
 
     def get_hyper(self, page: int = 1, page_size: int = 10) -> Dict:
+        '''get hyper'''
         data = self.get_page(page, page_size)
         if data == []:
             return {'page_size': 0, 'page': page, 'data': data,
@@ -48,4 +50,5 @@ class Server:
                 'total_pages': int(len(self.__dataset) / page_size)}
 
     def index_range(self, page: int, page_size: int) -> Tuple:
+        '''index range'''
         return (page - 1) * page_size, page_size * page
