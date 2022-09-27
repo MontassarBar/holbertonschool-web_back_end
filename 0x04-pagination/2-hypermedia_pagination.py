@@ -41,16 +41,16 @@ class Server:
     def get_hyper(self, page: int = 1, page_size: int = 10) -> Dict:
         '''get hyper'''
         data = self.get_page(page, page_size)
-        p = page
+        ps = page_size
         pn = page + 1
         pp = page - 1
         if page > len(self.__dataset):
-            p = 0
+            ps = 0
         if pn > len(self.__dataset):
             pn = None
         if pp < 0:
             pp = None
-        return {'page_size': page_size, 'page': p, 'data': data,
+        return {'page_size': ps, 'page': page, 'data': data,
                 'next_page': pn, 'prev_page': pp,
                 'total_pages': int(len(self.__dataset) / page_size)}
 
