@@ -41,16 +41,17 @@ class Server:
     def get_hyper(self, page: int = 1, page_size: int = 10) -> Dict:
         '''get hyper'''
         data = self.get_page(page, page_size)
+        p = page
+        pn = page + 1
+        pp = page - 1
         if page > len(self.__dataset):
-            return {'page_size': 0, 'page': page, 'data': data,
-                    'next_page': None, 'prev_page': page - 1,
-                    'total_pages': int(len(self.__dataset) / page_size)}
-        if page - 1 < 1:
-            {'page_size': page_size, 'page': page, 'data': data,
-                'next_page': page + 1, 'prev_page': None,
-                'total_pages': int(len(self.__dataset) / page_size)}
-        return {'page_size': page_size, 'page': page, 'data': data,
-                'next_page': page + 1, 'prev_page': page - 1,
+            p = 0
+        if pn > len(self.__dataset):
+            pn = None
+        if pp < 0:
+            pp = None
+        return {'page_size': p, 'page': page, 'data': data,
+                'next_page': pn, 'prev_page': pp,
                 'total_pages': int(len(self.__dataset) / page_size)}
 
     def index_range(self, page: int, page_size: int) -> Tuple:
