@@ -50,7 +50,7 @@ class Server:
             pn = None
         if pp < 0:
             pp = None
-        return {'page_size': p, 'page': page, 'data': data,
+        return {'page_size': page_size, 'page': p, 'data': data,
                 'next_page': pn, 'prev_page': pp,
                 'total_pages': int(len(self.__dataset) / page_size)}
 
