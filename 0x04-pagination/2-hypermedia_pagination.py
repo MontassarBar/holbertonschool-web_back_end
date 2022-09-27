@@ -52,7 +52,7 @@ class Server:
             pp = None
         return {'page_size': ps, 'page': page, 'data': data,
                 'next_page': pn, 'prev_page': pp,
-                'total_pages': int(len(self.__dataset) / page_size)}
+                'total_pages': len(self.__dataset) / page_size}
 
     def index_range(self, page: int, page_size: int) -> Tuple:
         '''index range'''
