@@ -50,6 +50,17 @@ def get_db() -> mysql.connector.connection.MySQLConnection:
                         password=os.getenv('PERSONAL_DATA_DB_PASSWORD', ''))
 
 
+def main():
+    '''i cant test '''
+    db = get_db()
+    cursor = db.cursor()
+    x = cursor.execute("SELECT * FROM users;")
+    for row in x:
+        print(row)
+    cursor.close()
+    db.close()
+
+
 def filter_datum(fields: List[
                 str], redaction: str,
                 message: str, separator: str) -> str:
@@ -58,3 +69,7 @@ def filter_datum(fields: List[
         message = re.sub(f"{y}=.+?{separator}",
                          f"{y}={redaction}{separator}", message)
     return message
+
+
+if __name__ == "__main__":
+    main()
