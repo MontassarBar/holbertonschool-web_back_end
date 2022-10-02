@@ -27,7 +27,7 @@ class RedactingFormatter(logging.Formatter):
                 record), self.SEPARATOR)
 
 
-def get_logger(self) -> logging.Logger:
+def get_logger() -> logging.Logger:
     '''Create logger'''
     logger = logging.getLogger("user_data")
     logger.setLevel(logging.INFO)
