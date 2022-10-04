@@ -19,11 +19,19 @@ class Auth:
             else:
                 s = p
             for x in excluded_paths:
+                f = ""
                 p2 = x
                 if x[-1] == '/':
                     s2 = p2.rstrip(p2[-1])
                 else:
                     s2 = p2
+                if s2[-1] == '*':
+                    s2 = s2.rstrip(s2[-1])
+                    l = len(s2)
+                    for i in range(0, l):
+                        f += s[i]
+                    if f == s2:
+                        c += 1
                 if s == s2:
                     c += 1
             if c == 0:
