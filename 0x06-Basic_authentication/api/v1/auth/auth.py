@@ -19,8 +19,8 @@ class Auth:
             else:
                 s = p
             for x in excluded_paths:
+                p2 = x
                 if x[-1] == '/':
-                    p2 = x
                     s2 = p2.rstrip(p2[-1])
                 else:
                     s2 = p2
