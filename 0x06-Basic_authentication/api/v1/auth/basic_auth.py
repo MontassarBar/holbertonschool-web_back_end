@@ -67,7 +67,7 @@ class BasicAuth(Auth):
                     c = i
                     break
             for i in range(0, len(decoded_base64_authorization_header)):
-                if i <= c:
+                if i < c:
                     email += decoded_base64_authorization_header[i]
                 if i > c:
                     pwd += decoded_base64_authorization_header[i]
