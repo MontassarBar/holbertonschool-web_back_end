@@ -27,8 +27,7 @@ class Auth:
                     s2 = p2
                 if s2[-1] == '*':
                     s2 = s2.rstrip(s2[-1])
-                    l = len(s2)
-                    for i in range(0, l):
+                    for i in range(0, len(s2)):
                         f += s[i]
                     if f == s2:
                         c += 1
