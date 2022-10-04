@@ -45,9 +45,9 @@ class BasicAuth(Auth):
         ''' returns the user email and password from the Base64
             decoded value'''
         if decoded_base64_authorization_header is None:
-            (None, None)
+            return (None, None)
         if str(decoded_base64_authorization_header).isnumeric() is True:
-            (None, None)
+            return (None, None)
         x = 0
         for i in range(0, len(decoded_base64_authorization_header)):
             if decoded_base64_authorization_header[i] == ':':
