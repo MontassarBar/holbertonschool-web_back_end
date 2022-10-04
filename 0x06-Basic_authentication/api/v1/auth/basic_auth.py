@@ -53,12 +53,25 @@ class BasicAuth(Auth):
         x = 0
         for i in range(0, len(decoded_base64_authorization_header)):
             if decoded_base64_authorization_header[i] == ':':
-                x = 1
+                x += 1
         if x < 1:
             return (None, None)
-        else:
+        elif x == 1:
             return (decoded_base64_authorization_header.split(':')[0],
                     decoded_base64_authorization_header.split(':')[1])
+        else:
+            email = ""
+            pwd = ""
+            for i in range(0, len(decoded_base64_authorization_header)):
+                if decoded_base64_authorization_header[i] == ':':
+                    c = i
+                    break
+            for i in range(0, len(decoded_base64_authorization_header)):
+                if i <= c:
+                    email += decoded_base64_authorization_header[i]
+                if i > c:
+                    pwd += decoded_base64_authorization_header[i]
+            return (email, pwd)
 
     def user_object_from_credentials(
             self, user_email: str, user_pwd: str) -> TypeVar('User'):
