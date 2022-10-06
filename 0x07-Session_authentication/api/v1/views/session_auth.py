@@ -1,9 +1,8 @@
 #!/usr/bin/env python3
-''' Module of Users views'''
+'''handles all routes for the Session authentication'''
 
 from api.v1.views import app_views
-from flask import Flask, jsonify, abort, request
-from flask_cors import (CORS, cross_origin)
+from flask import jsonify, request
 from models.user import User
 import os
 
