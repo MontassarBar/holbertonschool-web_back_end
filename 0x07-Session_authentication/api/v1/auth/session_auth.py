@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 '''SessionAuth class'''
 
+from ast import Delete
 import uuid
 from api.v1.auth.auth import Auth
 from models.user import User
@@ -28,3 +29,15 @@ class SessionAuth(Auth):
         '''returns a User instance based on a cookie value'''
         return User.get(self.user_id_for_session_id(
                 self.session_cookie(request)))
+
+    def destroy_session(self, request=None):
+        '''deletes the user session / logout'''
+        if request is None:
+            return False
+        cookie = self.session_cookie(request)
+        if cookie is None:
+            return False
+        if not self.user_id_for_session_id(cookie):
+            return False
+        del self.user_id_by_session_id[cookie]
+        return True
