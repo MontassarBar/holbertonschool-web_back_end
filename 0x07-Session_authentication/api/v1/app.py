@@ -36,8 +36,6 @@ def before_request():
     if x is False:
         pass
     else:
-        if auth.authorization_header(request) is None:
-            abort(401)
         if auth.current_user(request) is None:
             abort(403)
         if auth.authorization_header(
