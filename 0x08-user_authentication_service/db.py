@@ -39,6 +39,8 @@ class DB:
         return new_user
 
     def find_user_by(self, **kwargs) -> User:
+        '''returns the first row found in the users table
+            as filtered by the method's input arguments'''
         for x in kwargs.keys():
             if x not in User.__table__.columns.keys():
                 raise InvalidRequestError
