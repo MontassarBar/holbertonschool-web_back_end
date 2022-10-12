@@ -4,7 +4,10 @@
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm.session import Session
 from user import Base, User
+from sqlalchemy.orm.exc import NoResultFound
+from sqlalchemy.exc import InvalidRequestError
 
 
 class DB:
@@ -20,7 +23,7 @@ class DB:
         self.__session = None
 
     @property
-    def _session(self):
+    def _session(self) -> Session:
         """Memoized session object
         """
         if self.__session is None:
@@ -34,3 +37,12 @@ class DB:
         self._session.add(new_user)
         self._session.commit()
         return new_user
+
+    def find_user_by(self, **kwargs) -> User:
+        for x in kwargs.keys():
+            if x not in User.__table__.columns.keys():
+                raise InvalidRequestError
+        user = self._session.query(User).filter_by(**kwargs).first()
+        if not user:
+            raise NoResultFound
+        return user
