@@ -35,5 +35,4 @@ class DB:
         new_user = User(email=email, hashed_password=hashed_password)
         new_session = self._session
         new_session.add(new_user)
-        
         return new_user
