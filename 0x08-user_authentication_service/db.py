@@ -32,19 +32,19 @@ class DB:
         return self.__session
 
     def add_user(self, email: str, hashed_password: str) -> User:
-        """save the user to the database and returns a User object"""
-        DBSession = self._session
+        ''' save the new user to the databaseand returns a User object'''
         new_user = User(email=email, hashed_password=hashed_password)
-        DBSession.add(new_user)
-        DBSession.commit()
+        self._session.add(new_user)
+        self._session.commit()
         return new_user
 
     def find_user_by(self, **kwargs) -> User:
-        """returns the first row found in the users table
-            as filtered by the method's input arguments"""
-        DBSession = self._session
-        query = DBSession.query(User).filter_by(**kwargs)
-        result = query.first()
-        if (result is None):
+        '''returns the first row found in the users table
+            as filtered by the method's input arguments'''
+        for x in kwargs.keys():
+            if x not in User.__table__.columns.keys():
+                raise InvalidRequestError
+        user = self._session.query(User).filter_by(**kwargs).first()
+        if not user:
             raise NoResultFound
-        return result
+        return user
