@@ -69,7 +69,7 @@ def profile():
 def reset_password():
     '''generate a token and respond with a 200 HTTP status'''
     try:
-        email = request.cookies.get("email")
+        email = request.form['email']
         reset_password = AUTH.get_reset_password_token(email)
         return jsonify({"email": email, "reset_token": reset_password}), 200
     except ValueError:
