@@ -70,3 +70,12 @@ class Auth:
         '''updates the corresponding user’s session ID to None'''
         self._db.update_user(user_id, session_id=None)
         return None
+
+    def get_reset_password_token(self, email: str) -> str:
+        '''generate a UUID and update the user’s reset_token database field'''
+        try:
+            user = self._db.find_user_by(email=email)
+            user.reset_token = _generate_uuid()
+            return user.reset_token
+        except NoResultFound:
+            raise ValueError
