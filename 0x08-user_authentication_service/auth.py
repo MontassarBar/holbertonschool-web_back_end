@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 '''auth'''
-import uuid
 import bcrypt
 from db import DB
 from user import User
@@ -85,7 +84,7 @@ class Auth:
             with the new hashed password and the reset_token field to None'''
         try:
             user = self._db.find_user_by(reset_token=reset_token)
-            newpwd = _hash_password(password)
-            self._db.update_user(user.id, hashed_password=newpwd, reset_token=None)
+            self._db.update_user(user.id, hashed_password=_hash_password(
+                password), reset_token=None)
         except NoResultFound:
             raise ValueError
