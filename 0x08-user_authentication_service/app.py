@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 '''flak app'''
 from auth import Auth
-from flask import Flask, jsonify, request, abort
+from flask import Flask, jsonify, request, abort, redirect
 from auth import Auth
 
 
@@ -29,6 +29,7 @@ def users() -> str:
 
 @app.route('/sessions', methods=['POST'])
 def login():
+    '''login'''
     email = request.form['email']
     password = request.form['password']
     if AUTH.valid_login(email, password) is False:
@@ -38,6 +39,19 @@ def login():
         resp = jsonify({"email": "<user email>", "message": "logged in"})
         resp.set_cookie("session_id", session_id)
         return resp
+
+
+@app.route('/sessions', methods=['DELETE'])
+def logout():
+    '''logout'''
+    session_id = request.cookies.get("session_id")
+    try:
+        user = AUTH.get_user_from_session_id(session_id)
+        if user is not None:
+            AUTH.destroy_session(user.id)
+            return redirect('/')
+    except Exception:
+        abort(403)
 
 
 if __name__ == "__main__":
