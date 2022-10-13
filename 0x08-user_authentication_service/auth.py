@@ -85,7 +85,7 @@ class Auth:
             with the new hashed password and the reset_token field to None'''
         try:
             user = self._db.find_user_by(reset_token=reset_token)
-            self._db.update_user(user.id, hashed_password=_hash_password(
-                password), reset_token=None)
+            newpwd = _hash_password(password)
+            self._db.update_user(user.id, hashed_password=newpwd, reset_token=None)
         except NoResultFound:
             raise ValueError
