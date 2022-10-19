@@ -58,7 +58,7 @@ class TestGithubOrgClient(unittest.TestCase):
 class TestIntegrationGithubOrgClient(unittest.TestCase):
     '''TestIntegrationGithubOrgClient class'''
     @classmethod
-    def setUpClass(cls):
+    def setupClass(cls):
         '''start a patcher named'''
         cls.get_patcher = patch('requests.get')
         cls.mock_object = cls.get_patcher.start()
@@ -66,7 +66,7 @@ class TestIntegrationGithubOrgClient(unittest.TestCase):
                                        cls.repos_payload,
                                        cls.expected_repos,
                                        cls.apache2_repos]
-
+    @classmethod
     def tearDownClass(cls):
         '''stop the patcher'''
         cls.get_patcher.stop()
