@@ -58,7 +58,7 @@ class TestIntegrationGithubOrgClient(unittest.TestCase):
     '''TestIntegrationGithubOrgClient class'''
     @classmethod
     def setupClass(cls):
-        '''start a patcher named'''
+        '''start a patcher'''
         cls.get_patcher = patch('requests.get')
         cls.mock_object = cls.get_patcher.start()
         cls.mock_object.side_effect = [cls.org_payload,
