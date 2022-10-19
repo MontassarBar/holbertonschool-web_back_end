@@ -62,11 +62,11 @@ class TestIntegrationGithubOrgClient(unittest.TestCase):
         '''start a patcher named'''
         cls.get_patcher = patch('requests.get')
         cls.mock_object = cls.get_patcher.start()
-        cls.mock_object.return_value.json.side_effect = [cls.org_payload,
+        cls.mock_object.side_effect = [cls.org_payload,
                                        cls.repos_payload,
                                        cls.expected_repos,
                                        cls.apache2_repos]
 
-    def tearDown(cls):
+    def tearDownClass(cls):
         '''stop the patcher'''
         cls.get_patcher.stop()
