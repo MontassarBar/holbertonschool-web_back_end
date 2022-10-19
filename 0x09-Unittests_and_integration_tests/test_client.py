@@ -29,10 +29,10 @@ class TestGithubOrgClient(unittest.TestCase):
             self.assertEqual(
                     cls._public_repos_url, test_mock.return_value['repos_url'])
 
-    @patch('client.get_json')
+    @patch('client.get_json',
+           return_value=[{"name": "valo"}, {"name": "lol"}])
     def test_public_repos(self, test_payload):
         '''unit-test GithubOrgClient.public_repos'''
-        test_payload.return_value = [{"name": "valo"}, {"name": "lol"}]
         with patch('client.GithubOrgClient._public_repos_url',
                    new_callable=PropertyMock) as test_mock:
             test_mock.return_value = 'http://monta2234.com'
