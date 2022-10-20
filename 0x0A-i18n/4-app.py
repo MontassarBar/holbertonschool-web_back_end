@@ -22,7 +22,7 @@ def get_locale():
     '''determine the best match with our supported languages'''
     if 'locale' in request.args:
         locale = request.args.get('locale')
-        if locale in Config.LANGUAGES:
+        if locale and locale in Config.LANGUAGES:
             return locale
     return request.accept_languages.best_match(app.config['LANGUAGES'])
 
@@ -30,7 +30,7 @@ def get_locale():
 @app.route('/')
 def welcome():
     '''web page rendering'''
-    return render_template('1-index.html')
+    return render_template('4-index.html')
 
 
 if __name__ == "__main__":
