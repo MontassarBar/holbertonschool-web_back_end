@@ -3,6 +3,7 @@
 
 import redis
 import uuid
+from typing import Callable, Optional, Union
 
 
 class Cache:
@@ -12,9 +13,8 @@ class Cache:
         store an instance of the Redis client
         as a private variable named _redis
         '''
-        r = redis.Redis()
-        r.flushdb()
-        self._redis = r
+        self._redis = redis.Redis()
+        self._redis.flushdb()
 
     def store(self, data) -> str:
         '''
