@@ -52,7 +52,7 @@ def replay(method):
     print('{} was called {} times:'.format(method.__qualname__, len(lis)))
     for x in range(0, len(lis)):
         for y in range(0, 1):
-            print("{}(*{},)) -> {}".format(
+            print("{}(*{}) -> {}".format(
                 method.__qualname__, lis[x][y].decode(
                     "utf-8"), lis[x][y + 1].decode("utf-8")))
 
