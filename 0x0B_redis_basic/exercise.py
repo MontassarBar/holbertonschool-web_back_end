@@ -47,4 +47,4 @@ class Cache:
         '''
         convert the key type to int
         '''
-        return key
+        return int(key)
