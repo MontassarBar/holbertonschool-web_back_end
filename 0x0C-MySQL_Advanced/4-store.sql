@@ -1,0 +1,3 @@
+-- script that creates a trigger that decreases the quantity of an item after adding a new order
+-- columns:
+CREATE TRIGGER quantity_count AFTER INSERT ON orders FOR EACH ROW UPDATE items SET items.quantity = items.quantity - NEW.number WHERE items.name = NEW.item_name
