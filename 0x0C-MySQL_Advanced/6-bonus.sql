@@ -6,6 +6,6 @@ BEGIN
 IF EXISTS (SELECT * FROM projects WHERE projects.name = project_name) = 0 THEN
 INSERT INTO projects (name) VALUES (project_name);
 END IF;
-INSERT INTO corrections (user_id, project_id, score) VALUES (user_id, (SELECT id FROM projects WHERE name = projects_name), score);
+INSERT INTO corrections (user_id, project_id, score) VALUES (user_id, (SELECT id FROM projects WHERE name = project_name), score);
 END;//
 DELIMITER ;
