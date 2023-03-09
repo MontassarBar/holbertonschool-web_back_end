@@ -1,7 +1,7 @@
 --script that creates a stored procedure AddBonus that adds a new correction for a student
 --columns:
 DELIMITER //
-CREATE Procedure AddBonus(IN user_id INT, IN project_name VARCHAR(255), IN score INT)
+CREATE PROCEDURE AddBonus(IN user_id INT, IN project_name VARCHAR(255), IN score INT)
 BEGIN
 IF EXISTS (SELECT * FROM projects WHERE projects.name = project_name) = 0 THEN
 INSERT INTO projects (name) VALUES (project_name);
