@@ -2,7 +2,7 @@
 -- The function SafeDiv takes 2 arguments: a and b
 DELIMITER //
 CREATE FUNCTION SafeDiv (a INT, b INT)
-RETURNS FLOAT
+RETURNS FLOAT DETERMINISTIC
 BEGIN
 IF b = 0 THEN
 RETURN 0;
