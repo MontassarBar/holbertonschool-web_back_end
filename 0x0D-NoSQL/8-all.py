@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-'''func'''
+'''function'''
 
 
 def list_all(mongo_collection):
