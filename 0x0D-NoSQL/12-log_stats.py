@@ -13,6 +13,6 @@ if __name__ == "__main__":
     print("Methods:")
     for method in methods:
         num1 = col.count_documents({"method": method})
-        print(f"    method {method}: {num1}")
+        print(f"	method {method}: {num1}")
     num2 = col.count_documents({"method": "GET", "path": "/status"})
     print(f"{num2} status check")
