@@ -10,6 +10,7 @@ if __name__ == "__main__":
     doc_num = col.count_documents({})
     print(f"{doc_num} logs")
     methods = ["GET", "POST", "PUT", "PATCH", "DELETE"]
+    print("Methods:")
     for method in methods:
         num1 = col.count_documents({"method": method})
         print(f"    method {method}: {num1}")
