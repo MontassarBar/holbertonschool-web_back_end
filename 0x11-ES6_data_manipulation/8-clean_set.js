@@ -1,8 +1,5 @@
 export default function cleanSet(set, startString) {
   let x = '';
-  if (startString === 'undefined') {
-    return x;
-  }
   for (const elem of set) {
     if (startString && elem && elem.substring(0, startString.length) === startString) {
       const str = elem.substring(startString.length, elem.lenght);
