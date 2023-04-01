@@ -12,13 +12,13 @@ function countStudents(database) {
   fs.createReadStream(database)
     .pipe(csv.parse({ headers: true }))
     .on('data', (row) => data.push(row))
-    .on('end', () => data.forEach((student) => {
+    .on('data', () => data.forEach((student) => {
       if (fields.indexOf(student.field) === -1) {
         fields.push(student.field);
       }
     }))
-    .on('end', () => console.log(`Number of students: ${data.length}`))
     .on('end', () => {
+      console.log(`Number of students: ${data.length}`);
       for (const field of fields) {
         const x = data.filter((student) => student.field === field);
         let firstnames = '';
