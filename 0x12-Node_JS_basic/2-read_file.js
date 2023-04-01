@@ -1,6 +1,7 @@
 const fs = require('fs');
 
 function countStudents(database) {
+  try{
   const fields = [];
   let header = [];
   const data = fs.readFileSync(database, 'utf-8');
@@ -27,5 +28,8 @@ function countStudents(database) {
     }
     console.log(`Number of students in ${field}: ${n.length}. List: ${firstnames.slice(0, -2)}`);
   }
+}catch(err) {
+  throw Error('Cannot load the database')
+}
 }
 module.exports = countStudents;
