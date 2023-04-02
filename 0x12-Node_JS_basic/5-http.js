@@ -1,23 +1,23 @@
 const http = require('http');
-const url = require('url');
 const countStudents = require('./3-read_file_async');
 
 const app = http.createServer((req, res) => {
-  const urlParts = url.parse(req.url);
-  if (urlParts.pathname === '/') {
-    res.write('Hello Holberton School!');
-    res.end();
-  } else if (urlParts.pathname === '/students') {
+  res.statusCode = 200;
+  res.setHeader('Content-Type', 'text/plain');
+  const { url } = req;
+  if (url === '/') res.end('Hello Holberton School!');
+  else if (url === '/students') {
     countStudents(process.argv[2])
-      .then((result) => {
-        res.write(`This is the list of our students\n${result}`);
-        res.end();
+      .then((message) => {
+        const response = `This is the list of our students\n${message}`;
+        res.end(response);
       })
-      .catch((error) => {
-        res.write(error);
-        res.end();
+      .catch((err) => {
+        res.end(`${err.message}\n`);
       });
   }
-}).listen(1245);
+});
+
+app.listen(1245);
 
 module.exports = app;
