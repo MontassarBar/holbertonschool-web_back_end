@@ -1,32 +1,42 @@
 const fs = require('fs');
-const csv = require('fast-csv');
 
-function countStudents(database) {
-  const data = [];
-  const fields = [];
-  try {
-    fs.readFileSync(database);
-  } catch (err) {
-    throw Error('Cannot load the database');
-  }
-  fs.createReadStream(database)
-    .pipe(csv.parseFile({ headers: true }))
-    .on('data', (row) => data.push(row))
-    .on('data', () => data.forEach((student) => {
-      if (fields.indexOf(student.field) === -1) {
-        fields.push(student.field);
+async function countStudents(database) {
+  return new Promise((resolve, reject) => {
+    const fields = [];
+    let header = [];
+    fs.readFile(database, 'utf-8', (err, data) => {
+      if (err) {
+        reject(new Error('Cannot load the database'));
       }
-    }))
-    .on('end', () => {
-      console.log(`Number of students: ${data.length}`);
+      const students = data.split('\n').map((student) => student.split(','));
+      header = students.shift();
+      for (let y = 0; y < students.length; y += 1) {
+        for (let x = 0; x < students[y].length; x += 1) {
+          students[y][header[x]] = students[y][x];
+        }
+        students[y].splice(0, 4);
+      }
+      students.pop();
+      students.forEach((student) => {
+        if (fields.indexOf(student.field) === -1) {
+          fields.push(student.field);
+        }
+      });
+      const output = [];
+      output.push(`Number of students: ${students.length}`);
       for (const field of fields) {
-        const x = data.filter((student) => student.field === field);
+        const n = students.filter((student) => student.field === field);
         let firstnames = '';
-        for (const st of x) {
+        for (const st of n) {
           firstnames += `${st.firstname}, `;
         }
-        console.log(`Number of students in ${field}: ${x.length}. List: ${firstnames.slice(0, -2)}`);
+        output.push(`Number of students in ${field}: ${n.length}. List: ${firstnames.slice(0, -2)}`);
       }
+      const outp = output.join('\n');
+      console.log(outp);
+      resolve(outp);
     });
+  });
 }
+
 module.exports = countStudents;
