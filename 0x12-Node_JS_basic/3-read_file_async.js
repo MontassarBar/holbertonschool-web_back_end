@@ -34,8 +34,8 @@ async function countStudents(database) {
         output.push(`Number of students in ${field}: ${n.length}. List: ${firstnames.slice(0, -2)}`);
       }
       const outp = output.join('\n');
-      resolve(outp);
       console.log(outp);
+      resolve(outp);
     });
   });
 }
