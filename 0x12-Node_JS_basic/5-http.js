@@ -1,5 +1,6 @@
 const http = require('http');
 const url = require('url');
+const countStudents = require('./3-read_file_async');
 
 const app = http.createServer((req, res) => {
   const urlParts = url.parse(req.url);
@@ -7,8 +8,15 @@ const app = http.createServer((req, res) => {
     res.write('Hello Holberton School!');
     res.end();
   } else if (urlParts.pathname === '/students') {
-    res.write('This is the list of our students');
-    res.end();
+    countStudents(process.argv[2])
+      .then((result) => {
+        res.write(`This is the list of our students\n${result}`);
+        res.end();
+      })
+      .catch((error) => {
+        res.write(error);
+        res.end();
+      });
   }
 }).listen(1245);
 
