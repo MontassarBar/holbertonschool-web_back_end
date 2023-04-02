@@ -7,6 +7,7 @@ async function countStudents(database) {
     fs.readFile(database, 'utf-8', (err, data) => {
       if (err) {
         reject(new Error('Cannot load the database'));
+        return;
       }
       const students = data.split('\n').map((student) => student.split(','));
       header = students.shift();
@@ -33,8 +34,8 @@ async function countStudents(database) {
         output.push(`Number of students in ${field}: ${n.length}. List: ${firstnames.slice(0, -2)}`);
       }
       const outp = output.join('\n');
-      console.log(outp);
       resolve(outp);
+      console.log(outp);
     });
   });
 }
