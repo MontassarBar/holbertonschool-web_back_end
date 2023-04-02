@@ -2,13 +2,13 @@ const fs = require('fs');
 
 async function countStudents(database) {
   return new Promise((resolve, reject) => {
+    const fields = [];
+    let header = [];
     fs.readFile(database, 'utf-8', (err, data) => {
       if (err) {
         reject(new Error('Cannot load the database'));
         return;
       }
-      const fields = [];
-      let header = [];
       const students = data.split('\n').map((student) => student.split(','));
       header = students.shift();
       for (let y = 0; y < students.length; y += 1) {
@@ -34,8 +34,8 @@ async function countStudents(database) {
         output.push(`Number of students in ${field}: ${n.length}. List: ${firstnames.slice(0, -2)}`);
       }
       const outp = output.join('\n');
-      console.log(outp);
       resolve(outp);
+      console.log(outp);
     });
   });
 }
