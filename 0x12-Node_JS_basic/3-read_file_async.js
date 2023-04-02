@@ -23,6 +23,8 @@ async function countStudents(database) {
           fields.push(student.field);
         }
       });
+      const arr = [];
+      arr.push(`Number of students: ${students.length}`);
       console.log(`Number of students: ${students.length}`);
       for (const field of fields) {
         const n = students.filter((student) => student.field === field);
@@ -30,9 +32,11 @@ async function countStudents(database) {
         for (const st of n) {
           firstnames += `${st.firstname}, `;
         }
+        arr.push(`Number of students in ${field}: ${n.length}. List: ${firstnames.slice(0, -2)}`);
         console.log(`Number of students in ${field}: ${n.length}. List: ${firstnames.slice(0, -2)}`);
       }
-      resolve(students);
+      const str = arr.join('\n');
+      resolve(str);
     });
   });
 }
