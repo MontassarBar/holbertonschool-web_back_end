@@ -23,19 +23,16 @@ async function countStudents(database) {
           fields.push(student.field);
         }
       });
-      const output = [];
-      output.push(`Number of students: ${students.length}`);
+      console.log(`Number of students: ${students.length}`);
       for (const field of fields) {
         const n = students.filter((student) => student.field === field);
         let firstnames = '';
         for (const st of n) {
           firstnames += `${st.firstname}, `;
         }
-        output.push(`Number of students in ${field}: ${n.length}. List: ${firstnames.slice(0, -2)}`);
+        console.log(`Number of students in ${field}: ${n.length}. List: ${firstnames.slice(0, -2)}`);
       }
-      const outp = output.join('\n');
-      resolve(outp);
-      console.log(outp);
+      resolve(students);
     });
   });
 }
