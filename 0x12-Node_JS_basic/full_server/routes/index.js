@@ -10,7 +10,7 @@ function routes(app) {
   });
 
   router.get('/students', (req, res) => {
-    StudentsController.getAllStudents(res, req, process.argv[2]);
+    StudentsController.getAllStudents(req, res, process.argv[2]);
   });
 
   router.get('/students/:major', (req, res) => {
