@@ -1,5 +1,6 @@
 import { createClient } from 'redis';
 
+
 const client = createClient();
 
 async () => await client.connect();
